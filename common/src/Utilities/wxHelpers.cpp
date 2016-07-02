@@ -49,7 +49,7 @@ pxDialogCreationFlags pxDialogFlags()
 //
 bool BaseDeletableObject::MarkForDeletion()
 {
-	return !m_IsBeingDeleted.exchange(true);
+	return !_InterlockedExchange( &m_IsBeingDeleted, true );
 }
 
 void BaseDeletableObject::DeleteSelf()
