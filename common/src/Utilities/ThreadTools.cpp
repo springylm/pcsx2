@@ -291,7 +291,8 @@ bool Threading::pxThread::Detach()
 {
 	AffinityAssert_DisallowFromSelf(pxDiagSpot);
 
-	if( _InterlockedExchange( &m_detached, true ) ) return false;
+	//if( _InterlockedExchange( &m_detached, true ) ) return false;
+	if( m_detached.exchange(true) ) return false;
 	pthread_detach( m_thread );
 	return true;
 }
